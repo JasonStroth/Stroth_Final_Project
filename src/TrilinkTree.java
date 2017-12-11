@@ -5,21 +5,21 @@ public class TrilinkTree
 {
     private Node root = new Node();            
 
-   public String find(int key)  // finds integer and returns results
+   public int find(int key)  // finds integer and returns results
       {
-      String results;
+      int results;
       Node curNode = root;
       int childNumber;
       while(true)
          {
          if(( childNumber = curNode.findItem(key)) != -1)
          {
-             results = "Your number was found!";
+             results = 0;
              return results;
          }
          else if(curNode.isLeaf())
          {
-             results = "Your number was not found";
+             results = 1;
              return results;
          }
          else                                 

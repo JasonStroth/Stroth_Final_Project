@@ -9,11 +9,12 @@ public class Node
 {
   
    private static final int ORDER = 3;   
-   private int numItems = 0;
+   private int numItems = 0;                                 // keep count of full nodes
+   public int partialFull = 0;                               //keep count of partially full nodes
    private Node parent;
-   private Node childArray[] = new Node[ORDER];
-   private DataItem itemArray[] = new DataItem[ORDER-1];
-   private DataItem boolArray[] = new DataItem[ORDER-1];
+   private Node childArray[] = new Node[ORDER];             // allow split of parent node to lo, mid, hi
+   private DataItem itemArray[] = new DataItem[ORDER-1];    //allows each node to hold 2 variables
+   private DataItem boolArray[] = new DataItem[ORDER-1];    // boolean flags for variables in nodes
 
 
    public void connectChild(int childNum, Node child)
@@ -31,13 +32,13 @@ public class Node
       return tempNode;
       }
 
-   public Node getChild(int childNum)
-      { return childArray[childNum]; }
    public Node getLow(int childNum)
       { return childArray[childNum]; }
    public Node getMed(int childNum)
       { return childArray[childNum]; }
    public Node getHi(int childNum)
+      { return childArray[childNum]; }
+   public Node getChild(int childNum)
       { return childArray[childNum]; }
    public Node getParent()
       { return parent; }
@@ -53,7 +54,7 @@ public class Node
       { return (numItems==ORDER-1) ? true : false; }
    
    public boolean isPartialFull()
-      { return (numItems==ORDER-1) ? true : false; }
+      { return (numItems==ORDER-2) ? true : false; }
 
 
    public int findItem(int key)         // return index of item
@@ -71,7 +72,8 @@ public class Node
    }
 public int insertItem(DataItem newItem)
 {
-   numItems++;                           
+   numItems++;
+   
       int newKey = newItem.dData;         
       boolean newBool = true;               // hold a flag for each newItem
 
@@ -94,11 +96,9 @@ public int insertItem(DataItem newItem)
          }  
       itemArray[0] = newItem;              // insert new item
     return 0;
-}
-   
+}   
    public DataItem removeItem()        
-      {
-      
+      {      
       DataItem temp = itemArray[numItems-1];  
       itemArray[numItems-1] = null;           
       numItems--;                           
