@@ -4,12 +4,16 @@
  */
 public class DataItem 
 {
-    public int dData;           // one data item
+    public int dData;        // data item
+    
     
    public DataItem(int dd)  // constructor
-      { dData = dd; }
-   
-  
+   {
+       dData = dd; 
+   }
+     
    public void displayItem()   // display item
-      {System.out.print("/"+dData); }
+   {
+      System.out.print(" "+ dData);
+   }
 }

@@ -56,7 +56,6 @@ public class Node
    public boolean isPartialFull()
       { return (numItems==ORDER-2) ? true : false; }
 
-
    public int findItem(int key)         // return index of item
    {   
       {                                    
@@ -74,10 +73,8 @@ public int insertItem(DataItem newItem)
 {
    numItems++;
    
-      int newKey = newItem.dData;         
-      boolean newBool = true;               // hold a flag for each newItem
-
-
+      int newKey = newItem.dData;
+     
       for(int j=ORDER-2; j>=0; j--)       
          {                                 
          if(itemArray[j] == null)          
@@ -85,16 +82,21 @@ public int insertItem(DataItem newItem)
          else                              
             {                              
             int itsKey = itemArray[j].dData;
-            if(newKey < itsKey)            
-               itemArray[j+1] = itemArray[j]; 
+            if(newKey < itsKey)
+            {
+               itemArray[j+1] = itemArray[j];
+               boolArray[j+1] = boolArray[j];
+            }
             else
                {
-               itemArray[j+1] = newItem;   
+               itemArray[j+1] = newItem;
+               boolArray[j+1] = newItem;
                return j+1;              
                }                         
             }  
          }  
       itemArray[0] = newItem;              // insert new item
+      boolArray[0] = newItem;              // insert item into flag Array for deletion purposes
     return 0;
 }   
    public DataItem removeItem()        
@@ -107,21 +109,18 @@ public int insertItem(DataItem newItem)
 
    public void deleteItem(int key)        // place a flag in Node to "hide"
       {
-        for(int j=0; j<ORDER-1; j++)      // if found,
-         {                                 
-        // if(key == itemArray[j])    
-        //        boolean a = false;
-         }
-      numItems--;                         // make one less item
+       //BoolArray holds values like ItemArray. Make Bool Array unique to find "deleted values"
+       //boolArray[key] = -77;
+       numItems--;                         // make one less item
       }
 
    public void displayNode()        
       {
       for(int j=0; j<numItems; j++)
       {
-         // statement about boolean for deletes
+     //    if(boolArray[j] != -77)          //*****Need to fix BoolArray to flag deletes from being displayed.
          itemArray[j].displayItem();   
       }
-      System.out.println("/"); 
+      System.out.println(" "); 
       }
 }

@@ -5,7 +5,7 @@ public class TrilinkTree
 {
     private Node root = new Node();            
 
-   public int find(int key)  // finds integer and returns results
+   public int find(int key)                         // finds integer and returns results
       {
       int results;
       Node curNode = root;
@@ -26,8 +26,22 @@ public class TrilinkTree
             curNode = getNextChild(curNode, key);
          }  // end while
       }
+   
+   public int findPartialNode()
+   {
+       int partialNum = 0;                          //Find partially full nodes & create a count
+       Node curNode = root;
+       int numItems = curNode.getNumItems();
+       for(int j=0; j<numItems; j++)
+       {
+           Node nextNode = curNode.getChild(j);
+           if(nextNode.isPartialFull())
+               partialNum++;        
+       } 
+       return partialNum;
+   }
 
-   public void insert(int dValue) //inserts new value
+   public void insert(int dValue)                   //inserts new value
       {
       Node curNode = root;
       DataItem tempItem = new DataItem(dValue);
@@ -90,28 +104,40 @@ public class TrilinkTree
       newRight.connectChild(1, child3); 
       }  
    
-   public Node getNextChild(Node theNode, int theValue) // gets Low Medium or High Node
+   public Node getNextChild(Node theNode, int theValue)         // gets Low Medium or High Node
       {
       int n;      
       int numItems = theNode.getNumItems();
       for(n=0; n<numItems; n++)         
          {                             
          if( theValue < theNode.getItem(n).dData )
-            return theNode.getLow(n);               // return Low Node
+            return theNode.getLow(n);                           // return Low Node
          if( theValue > theNode.getItem(n).dData)
-            return theNode.getHi(theValue);         //return High Node
+            return theNode.getHi(theValue);                     //return High Node
          }                    
-      return theNode.getMed(n);                     // return Medium Node
+      return theNode.getMed(n);                                 // return Medium Node
       }
-
+   public void deleteValue(int value)                       //Find the value & place a flag in Node to "delete" value
+   {
+        Node curNode = root;
+        int childNumber;
+        while(true)
+        {
+          if((childNumber = curNode.findItem(value)) != -1)
+          {
+              curNode.deleteItem(value);                    //Node found, call node function to place flag.
+          }
+          else                                 
+              curNode = getNextChild(curNode, value);
+        } 
+    }
    public void displayTree()
       {
-      recDisplayTree(root, 0, 0);
+      recDisplay(root,0);
       }
 
-   private void recDisplayTree(Node thisNode, int level,int childNumber)
+   private void recDisplay(Node thisNode, int childNumber)
       {
-      System.out.print("level="+level+" child="+childNumber+" ");
       thisNode.displayNode();               // display this node
 
       // call ourselves for each child of this node
@@ -120,9 +146,10 @@ public class TrilinkTree
          {
          Node nextNode = thisNode.getChild(j);
          if(nextNode != null)
-            recDisplayTree(nextNode, level+1, j);
+            recDisplay(nextNode,j);
          else
             return;
          }
       } 
+   
 }
