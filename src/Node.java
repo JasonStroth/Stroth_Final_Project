@@ -16,22 +16,6 @@ public class Node
    private DataItem itemArray[] = new DataItem[ORDER-1];    //allows each node to hold 2 variables
    private DataItem boolArray[] = new DataItem[ORDER-1];    // boolean flags for variables in nodes
 
-
-   public void connectChild(int childNum, Node child)
-      {
-      childArray[childNum] = child;
-      if(child != null)
-         child.parent = this;
-      }
-
-   // disconnect child from this node, return it
-   public Node disconnectChild(int childNum)
-      {
-      Node tempNode = childArray[childNum];
-      childArray[childNum] = null;
-      return tempNode;
-      }
-
    public Node getLow(int childNum)
       { return childArray[childNum]; }
    public Node getMed(int childNum)
@@ -122,5 +106,20 @@ public int insertItem(DataItem newItem)
          itemArray[j].displayItem();   
       }
       System.out.println(" "); 
+      }
+      
+   public void connectChild(int childNum, Node child)
+      {
+      childArray[childNum] = child;
+      if(child != null)
+         child.parent = this;
+      }
+
+   // disconnect child from this node, return it
+   public Node disconnectChild(int childNum)
+      {
+      Node tempNode = childArray[childNum];
+      childArray[childNum] = null;
+      return tempNode;
       }
 }

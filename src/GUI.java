@@ -171,18 +171,18 @@ public class GUI extends javax.swing.JFrame {
 
 //************************ Add Integer to List:***********************************
      
-    jTextArea1.setText("");
+    jTextArea1.setText("");                 // Clear screen
     String text1 = jTextField1.getText();   // get user value
     int userValue;
     userValue = new Integer(text1);         // convert to Integer
     t.insert(userValue);                    // insert into Tree
-    jTextField1.setText(" ");               // clear screen
+    jTextField1.setText(" ");               // clear screen for next user input
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        
         // ************Find Integer from list*************************:
-        
+    jTextArea1.setText("");                        // Clear screen
     String text = jTextField2.getText();          //get value from user
     String results = "Your number was found!";
     int findVal = new Integer(text);               // change value to Int
@@ -200,7 +200,7 @@ public class GUI extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         
     //**********************DISPLAY COUNT***********************   
-    
+    jTextArea1.setText("");                                     // Clear screen before use
     int num = n.getNumItems();                                   // find count of whole nodes
     int partialNum = t.findPartialNode();                       // find count of partial nodes
     jTextArea1.setText("There are " + num + " whole nodes &" + partialNum + " partial nodes.");  // display count of Nodes    
@@ -209,7 +209,7 @@ public class GUI extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
     
     //**********************Print Results ************************
-   
+   jTextArea1.setText("");                                        // Clear screen
     jTextArea1.setText( "Results: " + t.displayTree());           //display results of all nodes
     }//GEN-LAST:event_jButton3ActionPerformed
 
